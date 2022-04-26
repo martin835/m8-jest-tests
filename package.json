@@ -7,7 +7,7 @@
   "scripts": {
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
     "watch": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --watchAll",
-    "mickeymouse": "say mickey mouse",
+    "systeminfo": "systeminfo",
     "dev": "nodemon -r dotenv/config src/index.js"
   },
   "keywords": [],

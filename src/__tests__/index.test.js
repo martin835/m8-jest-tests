@@ -85,6 +85,32 @@ describe("Testing the environment", () => {
     );
   });
 
+  it("Should test when updating a product at /products/:id, should return 404 for non-existing product", async () => {
+    const response = await client.put("/products/999999999999999999999999");
+    expect(response.status).toBe(404);
+  });
+
+  it("Should test when updating a product at /products/:id, should accept the request, change the name of the product, typeof name should be string", async () => {
+    const response = await client
+      .put(`/products/${productId}`)
+      .send({ name: "Test UPDATED prod." });
+    console.log("Testing put endpoint: ", response.body);
+    console.log(typeof response.body.name);
+
+    expect(response.body.name).toBe("Test UPDATED prod.");
+    expect(typeof response.body.name).toBe("string");
+  });
+
+  it("Should test when deleting a product at /products/:id, should return 404 for non-existing product", async () => {
+    const response = await client.delete("/products/999999999999999999999999");
+    expect(response.status).toBe(404);
+  });
+
+  it("Should test when deleting a product at /products/:id, should return 204 for existing product", async () => {
+    const response = await client.delete(`/products/${productId}`);
+    expect(response.status).toBe(204);
+  });
+
   afterAll(async () => {
     console.log("afterAll");
     await mongoose.connection.dropDatabase();
